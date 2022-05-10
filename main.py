@@ -154,3 +154,5 @@ while True:
     if dat == 104:
         led.duty_u16(0)
         servo.duty_u16(1638)
+    if dat == 152:
+        break
