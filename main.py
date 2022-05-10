@@ -15,8 +15,11 @@ led.duty_u16(0)
 timing = 60
 
 def servoSecure(pourcentage):
+    if pourcentage >1:
+        return 8192
     valueServo = [1638, 8192]
-    return int(valueServo[0]+pourcentage*valueServo[-1])
+    #return int(valueServo[0]+pourcentage*valueServo[-1]) for the sake of the servo
+    return 1638
     
 
 
@@ -119,7 +122,7 @@ while True:
         servo.duty_u16(1638)
         time.sleep(30/timing)
         led.duty_u16(0)
-        servo.duty_u16(3276)
+        servo.duty_u16(3276*2)
     if dat == 24:
         timing += 10
         print("incremented")
@@ -149,7 +152,5 @@ while True:
         servo.duty_u16(servoSecure(sound.read_u16()/65534))
         time.sleep(0.1)
     if dat == 104:
-        print("Program ended")
         led.duty_u16(0)
         servo.duty_u16(1638)
-        break
